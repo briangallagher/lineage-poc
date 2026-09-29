@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-09-29",
+  "scope": "slice-1-first-fresh-suite-diagnostic",
+  "cluster_api": "https://api.bgal-pool-ljt7l.aws.rh-ods.com:6443",
+  "namespace": "ol-best-practices",
+  "source": {
+    "repository_url": "https://github.com/briangallagher/dr-lineage.git",
+    "branch": "codex/lineage-poc-fixture-credentials",
+    "commit": "634f437da278d587bb484a3e014b44e4de04dd9b",
+    "scope": "sample-app-best-practices"
+  },
+  "lineage_poc_base_commit": "21ac032",
+  "images": {
+    "tag": "634f437da278",
+    "app_digest": "sha256:6a7befe27db6a4271f85958d86f185987ed4879b10bf4be1cddf1dfbf2f349c5",
+    "spark_digest": "sha256:1848a62a7d0bd55fc116007caefaa0c2b3720fe91dfa41903d648754aad44dfe"
+  },
+  "pipeline": {
+    "id": "76c7563e-7fcb-4fde-bbf4-61dac8a80a69",
+    "version_id": "2ea15a56-34f3-476d-977c-4f7d7333a654",
+    "package_sha256": "d09292ae11f5051105a026830843864b6261562d54a4b9dfcd27f65606902616"
+  },
+  "scenario_states": {
+    "success-1": "SUCCEEDED",
+    "success-2": "SUCCEEDED",
+    "success-after-bypass": "SUCCEEDED",
+    "failure-ingest": "FAILED",
+    "failure-spark": "FAILED",
+    "failure-embed": "FAILED"
+  },
+  "failure_spark": {
+    "kfp_run_id": "d4f55d73-1ebb-4c62-8901-6b732555ffed",
+    "workflow": "openlineage-data-registry-best-practices-ld4rf",
+    "spark_application": "transform-01a0ee2f",
+    "kfp_task_attempts": 2,
+    "native_spark_application_attempts": 1,
+    "second_attempt_kubernetes_status": 409,
+    "second_attempt_reason": "AlreadyExists",
+    "contract_error": "failure-spark expected two distinct task attempts; observed 1"
+  },
+  "root_cause": "The first eight characters of the per-attempt UUIDv7 were time-derived and identical across nearby retries, so SparkApplication names collided.",
+  "remediation": {
+    "decision": "architecture/decisions/ADR-0002-per-attempt-spark-application-identity.md",
+    "source_commit": "b4c418c9f4b53ada66fca71e74bd5c434a90d62c",
+    "regression_test": "test_spark_application_names_distinguish_uuid7_retry_attempts",
+    "local_test_count": 39,
+    "cluster_reverification": "pending"
+  }
+}
