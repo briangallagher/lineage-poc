@@ -30,7 +30,7 @@
     "dr-lineage": {
       "repository_url": "https://github.com/briangallagher/dr-lineage.git",
       "branch": "codex/lineage-poc-fixture-credentials",
-      "commit": "352425c64af56d3f92b34293e4125ed1598aa7f9",
+      "commit": "634f437da278d587bb484a3e014b44e4de04dd9b",
       "source_scope": "sample-app-best-practices"
     }
   }
