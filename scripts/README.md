@@ -32,3 +32,17 @@ syntax checks, and renders the OpenShift manifests. It emits JSON evidence on
 stdout without copying test logs or credentials into the record. Use
 `--setup` on a fresh checkout to install the locked Python dependencies first.
 Set `UV_CACHE_DIR` if your default cache is not writable.
+
+## Slice 1 cluster evidence
+
+After `run-scenarios.sh` succeeds, capture the source commit, image digests,
+pipeline package hash, and six KFP run IDs with:
+
+```bash
+python3 scripts/capture_slice1_cluster.py \
+  --pipeline-id PIPELINE_ID --pipeline-version-id VERSION_ID
+```
+
+The command validates the scenario states, the direct-write blindness check,
+the seed Job, and the images used by the deployment. It prints a sanitized JSON
+record to stdout for review and inclusion under `evidence/`.
