@@ -1,0 +1,49 @@
+{
+  "recorded_at": "2026-09-29",
+  "slice": "slice-1-inherited-golden-fixture",
+  "scope": "local-validation",
+  "lineage_poc": {
+    "commit": "6ddd8d77987a11371e2f69c1fe5e88c8146f2a44",
+    "working_tree": "dirty",
+    "note": "Evidence was recorded before the bootstrap baseline was committed."
+  },
+  "source": {
+    "repository": "/Users/briangallagher/dev/workspaces/dr-lineage",
+    "repository_url": "https://github.com/briangallagher/dr-lineage.git",
+    "application_path": "sample-app-best-practices",
+    "commit": "75b37c7ed9d548fa922bca256e8a7616e734db88",
+    "branch": "main",
+    "source_scope_working_tree": "clean",
+    "other_checkout_dirty_paths": [
+      "competitor-analysis.md"
+    ],
+    "reproducibility": "ready-from-pinned-source-scope"
+  },
+  "environment": {
+    "python": "3.12.9",
+    "pytest": "8.4.2",
+    "ruff": "0.13.1",
+    "oc_client": "4.12.0",
+    "dependency_resolution": "not-run; existing pinned .venv used because sandbox blocked uv global cache access"
+  },
+  "checks": [
+    {
+      "command": ".venv/bin/python -m pytest",
+      "result": "passed",
+      "details": "31 passed, 1 deprecation warning"
+    },
+    {
+      "command": ".venv/bin/ruff check src tests pipeline",
+      "result": "passed"
+    },
+    {
+      "command": "for script in scripts/*.sh; do bash -n \"$script\"; done",
+      "result": "passed"
+    },
+    {
+      "command": "oc kustomize openshift",
+      "result": "passed"
+    }
+  ],
+  "note": "The local validation was repeated with scripts/verify_slice1_local.py after source-scope pinning was implemented."
+}

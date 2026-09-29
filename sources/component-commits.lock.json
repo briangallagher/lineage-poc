@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "captured_on": "2026-09-29",
+  "components": {
+    "feast": {
+      "repository_url": "https://github.com/feast-dev/feast.git",
+      "branch": "master",
+      "commit": "1669661e15d3ba3b5ab9a9fffd19248d9c0da211"
+    },
+    "data-connect-hub": {
+      "repository_url": "https://github.com/opendatahub-io/data-connect-hub",
+      "branch": "main",
+      "commit": "d8413719308ef30b41c489ee9e51e5b6f35b9740"
+    },
+    "odh-dashboard": {
+      "repository_url": "https://github.com/opendatahub-io/odh-dashboard.git",
+      "branch": "main",
+      "commit": "21c0105ba5ab0163dfdc9d9f1d2176c90cc6c715"
+    },
+    "ogx": {
+      "repository_url": "https://github.com/ogx-ai/ogx.git",
+      "branch": "fix/file-search-null-config",
+      "commit": "32aa0848078217cff99b4d2d71d907f4f3a03455"
+    },
+    "data-registry-production": {
+      "repository_url": "https://gitlab.cee.redhat.com/data-strategy/data-registry-production.git",
+      "branch": "docs/data-registry-technical-documentation",
+      "commit": "1d8d003503cb0b3652634568a046e36fa1119745"
+    },
+    "dr-lineage": {
+      "repository_url": "https://github.com/briangallagher/dr-lineage.git",
+      "branch": "codex/lineage-poc-fixture-credentials",
+      "commit": "c7ec35c6249783ab412c0d8596af90cb4a7aae83",
+      "source_scope": "sample-app-best-practices"
+    }
+  }
+}

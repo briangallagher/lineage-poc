@@ -1,0 +1,47 @@
+{
+  "recorded_at": "2026-09-29",
+  "scope": "cluster-read-only-preflight-and-retained-lineage-verification",
+  "cluster_api": "https://api.bgal-pool-ljt7l.aws.rh-ods.com:6443",
+  "identity": "htpasswd-cluster-admin-user",
+  "openshift_version": "4.21.32",
+  "oc_client_version": "4.12.0",
+  "rhoai": {
+    "operator_csv": "rhods-operator.3.6.0-ea.1",
+    "operator_phase": "Succeeded",
+    "datasciencecluster": "default-dsc",
+    "datasciencecluster_phase": "Ready",
+    "managed_component_count": 12,
+    "aipipelines": "Managed",
+    "sparkoperator": "Managed",
+    "desired_deployments_without_available_replicas": 0,
+    "running_pods_with_unready_containers": 0,
+    "note": "The application namespace had 47 Running, 11 Succeeded, and one older Failed maas-ui pod. Current desired deployments were all available."
+  },
+  "general": {
+    "ready_nodes": 7,
+    "total_nodes": 7,
+    "cluster_operators_unavailable": 0,
+    "cluster_operators_degraded": 0,
+    "api_healthz": "ok"
+  },
+  "gpu": {
+    "gpu_nodes": 1,
+    "allocatable_gpus": 1,
+    "gpu_product": "NVIDIA-L40S",
+    "nfd_pods": "all-running",
+    "nfd_crd": "nodefeaturegroups.nfd.k8s-sigs.io",
+    "health_script_warning": "The skill script required nodefeaturegroups.nfd.openshift.io and reported failure, although NFD pods were healthy and the GPU was allocatable. No CRD change was made."
+  },
+  "slice_1": {
+    "namespace": "ol-best-practices",
+    "namespace_phase": "Active",
+    "application_preflight": "passed",
+    "dspa": "deployed-and-ready",
+    "fixture_deployments_ready": true,
+    "current_application_image_tag": "dev-20260910160844",
+    "retained_marquez_contract": "passed",
+    "retained_contract_checks": 18,
+    "fresh_scenario_run": "pending"
+  },
+  "cluster_mutations": "none"
+}

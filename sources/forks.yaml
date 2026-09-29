@@ -1,0 +1,24 @@
+# Local source checkouts used by the POC. Paths are relative to fork_root.
+# fork_root is relative to the lineage-poc repository root; override it with
+# LINEAGE_POC_FORK_ROOT when checkouts use a different directory layout.
+fork_root: ..
+components:
+  - name: feast
+    local_path: feast
+    role: data-registry-and-lineage-backend
+  - name: data-connect-hub
+    local_path: data-connect-hub
+    role: governed-ingestion-and-connections
+  - name: odh-dashboard
+    local_path: odh-dashboard
+    role: future-ui-and-bff-integration
+  - name: ogx
+    local_path: ogx-fork
+    role: model-and-vector-io
+  - name: data-registry-production
+    local_path: data-registry-production
+    role: registry-implementation-documentation
+  - name: dr-lineage
+    local_path: ../workspaces/dr-lineage
+    role: inherited-lineage-best-practices-application
+    source_scope: sample-app-best-practices
