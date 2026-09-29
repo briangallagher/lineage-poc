@@ -14,3 +14,4 @@ demo succeeds.
 | GAP-006 | Upstream component changes | Use adapters first; upstream only when required context is unavailable | Fork divergence may become unmaintainable | A missing producer contract is demonstrated | Open |
 | GAP-007 | Credential handling | The fixture now passes credentials through stdin; product workflows still require managed workload identities and secret references | Test credentials remain in local process memory during a run | First product component integration | Partial |
 | GAP-008 | Image provenance | Record source commit, image digest, deployment image, pipeline package, and run IDs together | A mutable or development tag cannot prove which code ran | First fresh Slice 1 build | Open |
+| GAP-009 | External image availability | Pin all fixture and product images by digest and verify access from target cluster registries | A formerly public tag can become unavailable and block redeploy | First fresh Slice 1 build | Open |
