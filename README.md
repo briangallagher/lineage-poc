@@ -49,7 +49,9 @@ and conformance fixture before adding new component-fork changes.
 
 The immediate next action is [Slice 1](architecture/implementation-slices.md):
 reproduce the inherited fixture, verify the active cluster context, and record
-the first machine-readable evidence bundle.
+the first machine-readable evidence bundle. The remaining acceptance run must
+use and verify an uploaded KFP pipeline-version reference; the earlier
+inline-spec suite is diagnostic evidence only.
 
 The first local validation result is recorded in
 [`evidence/2026-09-29-slice-1-local.json`](evidence/2026-09-29-slice-1-local.json).

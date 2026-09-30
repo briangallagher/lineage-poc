@@ -52,6 +52,17 @@ def main() -> None:
     observed = {run["scenario"]: run["actual_state"] for run in runs}
     if observed != expected or len(runs) != len(expected):
         raise RuntimeError(f"Scenario results do not match the expected suite: {observed}")
+    unlinked = [
+        run["scenario"]
+        for run in runs
+        if run.get("pipeline_id") != args.pipeline_id
+        or run.get("pipeline_version_id") != args.pipeline_version_id
+    ]
+    if unlinked:
+        raise RuntimeError(
+            "Scenario runs are not linked to the executed pipeline version: "
+            f"{unlinked}"
+        )
     bypass = report["bypass"]
     if bypass["eventCountBefore"] != bypass["eventCountAfter"]:
         raise RuntimeError("Direct source overwrite unexpectedly changed event count")
@@ -106,6 +117,7 @@ def main() -> None:
         "pipeline": {
             "id": args.pipeline_id,
             "version_id": args.pipeline_version_id,
+            "run_submission": "pipeline_version_reference",
             "package_sha256": hashlib.sha256(package.read_bytes()).hexdigest(),
         },
         "asset_id": report["asset"]["assetId"],

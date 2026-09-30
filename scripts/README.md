@@ -44,5 +44,6 @@ python3 scripts/capture_slice1_cluster.py \
 ```
 
 The command validates the scenario states, the direct-write blindness check,
-the seed Job, and the images used by the deployment. It prints a sanitized JSON
-record to stdout for review and inclusion under `evidence/`.
+the pipeline-version reference recorded on every run, the seed Job, and the
+images used by the deployment. It prints a sanitized JSON record to stdout for
+review and inclusion under `evidence/`.

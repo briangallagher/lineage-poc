@@ -25,11 +25,19 @@ its local checks and the cluster scenarios, then adapt the assertions into
 machine-readable evidence consumed by this repository.
 
 Current status: local checks complete, RHOAI and application preflight pass,
-and the 18 retained Marquez contract checks pass. A fresh run built from the
-pinned source commit and image digest capture remain to be completed.
+and the retry-collision fix has completed a fresh six-workflow cluster rerun.
+The fixture submits by an uploaded KFP pipeline-version reference and
+re-reads every run to verify that KFP retained that reference. The fresh
+version-linked rerun passed all 18 Marquez contract checks and its source,
+image, package, and run evidence is captured under `evidence/`.
 
 The local fixture credential runner was hardened in the `dr-lineage` fork and
 its published commit is pinned in the source lock.
+
+The initial inline-spec cluster suite was intentionally not accepted as final
+provenance evidence: KFP run metadata did not contain a pipeline version
+reference. That gap is tracked in `production/production-gaps.md`; the
+version-linked submission path is now the accepted Slice 1 path.
 
 Prove:
 
