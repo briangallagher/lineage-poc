@@ -45,6 +45,12 @@
     "source_commit": "b4c418c9f4b53ada66fca71e74bd5c434a90d62c",
     "regression_test": "test_spark_application_names_distinguish_uuid7_retry_attempts",
     "local_test_count": 39,
-    "cluster_reverification": "pending"
+    "cluster_reverification": {
+      "status": "passed",
+      "evidence": "evidence/2026-09-30-slice-1-cluster.json",
+      "failure_spark_run_id": "48453eb3-f355-4aea-8086-519047eea58d",
+      "distinct_task_attempts": 2,
+      "pipeline_version_id": "5a83ee36-34f2-4764-b168-3cc7ef175ed1"
+    }
   }
 }

@@ -1,8 +1,10 @@
-# Handoff — 2026-09-29, 17:39 UTC
+# Handoff — 2026-09-30, 07:27 UTC
 
-This is a pause point, not a Slice 1 completion claim. Read this file and
-`architecture/implementation-slices.md` before resuming cluster work. No
-credentials, tokens, kubeconfig data, or sensitive payloads are recorded here.
+Slice 1 is complete for the inherited fixture. Read this file and
+`architecture/implementation-slices.md` before starting Slice 2. This is not a
+production-readiness claim; the production-gap register remains authoritative.
+No credentials, tokens, kubeconfig data, or sensitive payloads are recorded
+here.
 
 ## User intent and scope
 
@@ -22,17 +24,16 @@ Data Registry context.
 
 - Integration repository: `/Users/briangallagher/dev/git-repos/lineage-poc`,
   branch `codex/lineage-poc-bootstrap`, published commit
-  `7063144a5d36597a4755a91768b47fec6b1c5e13` before this handoff. The
-  source lock pins the fork commit below. The retry-collision diagnostic
-  evidence and this handoff must be committed/pushed at the pause.
+  `375e283cd809645b2491a21b4c0e4066ed2c0e86` before the final evidence and
+  handoff update. The source lock pins the fork commit below.
 - Fixture fork: `/Users/briangallagher/dev/workspaces/dr-lineage`, remote
   `https://github.com/briangallagher/dr-lineage.git`, branch
   `codex/lineage-poc-fixture-credentials`, published commit
-  `b4c418c9f4b53ada66fca71e74bd5c434a90d62c`.
+  `bfd8f9de9417c921c2db6617ce227178741fd5a7`.
 - Fixture source scope `sample-app-best-practices` is clean and pinned. An
   unrelated untracked `competitor-analysis.md` at the fork root is user-owned
   and has been preserved.
-- The fixture has 39 passing local tests, changed-file Ruff check and format
+- The fixture has 40 passing local tests, changed-file Ruff check and format
   check pass, and `git diff --check` passes.
 
 ## Cluster verification and current execution
@@ -48,27 +49,27 @@ Data Registry context.
 - Dedicated namespace `ol-best-practices` has the fixture's MinIO, Marquez,
   registry, Spark Operator integration, and KFP/DSPA. No public Routes were
   created for the fixture.
-- Fresh corrected images built from fork commit `b4c418c...` and deployed:
-  `lineage-demo-app:b4c418c9f4b5` digest
-  `sha256:9f4aa93137d80a9b5e094a154b73c426703a50d34dfc39cf471e4157508e1618`;
-  `lineage-demo-spark:b4c418c9f4b5` digest
-  `sha256:fef8aac202b3f40cdc9b4ba8de93989b17915eab13add29f2bd7fc4d6e0338aa`.
+- Fresh images built from fork commit `bfd8f9d...` and deployed:
+  `lineage-demo-app:bfd8f9de9417` digest
+  `sha256:55fcabe57deb2328e9e846dad36dfeb3e79da41c8f972b0c4f210e441b5bfaaa`;
+  `lineage-demo-spark:bfd8f9de9417` digest
+  `sha256:b0090d8297154ab779702d63f849810d364519d862573ea2b40a287fde8b5b48`.
   Seed Job completed and registry rollout succeeded.
 - Compiled package `sample-app-best-practices/build/pipeline.yaml` SHA-256
-  `00fe8f691521a915032be59cd6ff3a2269fee104971ad9470e390541441404f0`.
-  KFP pipeline ID `76c7563e-7fcb-4fde-bbf4-61dac8a80a69`; uploaded
-  version ID `f9051a7c-59a0-4974-8169-15bf462981dd`. KFP API confirmed that
-  uploaded version's pipeline and platform specs exactly match both YAML
-  documents of the compiled package.
-- A six-scenario rerun was started via
-  `sample-app-best-practices/scripts/run-scenarios.sh` in tool session `3977`.
-  At 17:39 UTC, the first two success workflows (`...-b6dlw`, `...-2l2fr`)
-  had Succeeded; the next scenario had not yet appeared. The first run ID is
-  `bf697cb7-1a10-4453-a6e7-85b11c89aa8a`. The suite submits scenarios
-  sequentially and writes `build/scenario-results.json` only at the end, then
-  calls `scripts/verify.sh`. Do not mistake the older report for this rerun.
-  The process may continue while this chat is paused; verify its state rather
-  than assuming it completed or stopped.
+  `510c1999857d31702277525f5810151e79bb0739a89139ba2b7ed308a3c96fa3`.
+  KFP pipeline ID `76c7563e-7fcb-4fde-bbf4-61dac8a80a69`; version ID
+  `5a83ee36-34f2-4764-b168-3cc7ef175ed1`.
+- The accepted six-scenario suite produced run IDs
+  `aee6700b-6e48-49ed-9e59-a89b764e838d`,
+  `92d11481-92d1-44d7-aec4-966babb06e6c`,
+  `e1c733f2-4ed6-4631-9beb-6942893423b7`,
+  `e19e1def-0388-4d1d-bbfa-2978a3eb3f36`,
+  `48453eb3-f355-4aea-8086-519047eea58d`, and
+  `ed500ef8-12cf-4eb2-ae08-ad7923792458`. All six runs were re-read from KFP
+  and carried the exact pipeline/version reference above. The scenario report
+  and 18-check verifier passed.
+- Sanitized evidence is recorded in
+  `evidence/2026-09-30-slice-1-cluster.json`.
 
 ## Findings and decisions
 
@@ -81,16 +82,12 @@ Data Registry context.
    `evidence/2026-09-29-slice-1-retry-collision.json`; the fix and rationale
    are in `architecture/decisions/ADR-0002-per-attempt-spark-application-identity.md`.
    The corrected name uses the full 32 UUID hex characters. Cluster contract
-   reverification remains pending until the current suite finishes.
-2. A separate pipeline-version provenance gap was found. The fixture's
-   `create_run_from_pipeline_package` API submits an inline spec. KFP's run
-   metadata has no `pipeline_version_id`, even though the uploaded version
-   matches the same compiled package. Do **not** describe the current suite as
-   version-linked. Before claiming Slice 1 fully qualified, change the
-   fixture runner to submit with `kfp.Client.run_pipeline(..., pipeline_id=...,
-   version_id=...)`, assert each run references that version through KFP's
-   read API, test it, publish a new fork commit, update the source lock,
-   rebuild, and rerun. Record this as an explicit provenance decision/gap.
+   reverification passed in the accepted cluster evidence.
+2. A separate pipeline-version provenance gap was found in the initial suite.
+   The fixture now submits with `kfp.Client.run_pipeline(..., pipeline_id=...,
+   version_id=...)`, asserts each run reference through KFP's read API, and
+   records the IDs in the report. The version-linked cluster rerun passed;
+   GAP-011 remains Partial because the product workflow is not yet qualified.
 3. External seed-image pull and S3 lifecycle `Content-MD5` issues were fixed
    in earlier fork commits; production gaps 009 and 010 remain partial because
    external base-image accessibility and storage upgrades need qualification.
@@ -100,29 +97,13 @@ Data Registry context.
 1. Confirm `git status --short` and `git rev-parse HEAD` in both repositories;
    keep the unrelated `competitor-analysis.md` untouched. Confirm `oc whoami`
    and `oc whoami --show-server` before any cluster write.
-2. In the fixture directory, check whether the current suite's process is
-   still running (tool session `3977` may or may not survive the pause).
-   Inspect `oc get workflows.argoproj.io -n ol-best-practices` for the new
-   workflows and inspect `build/scenario-results.json`. A completed new report
-   must contain first run ID `bf697cb7-1a10-4453-a6e7-85b11c89aa8a`.
-   If the process ended early or the report is absent/old, diagnose before
-   rerunning. Avoid overlapping suites because they share a mutable S3 source
-   and Marquez event-count bypass check.
-3. Once the new report exists, run `./scripts/verify.sh` from the fixture if
-   its automatic result is unknown. This is the regression gate for distinct
-   Spark retries. Capture the exact pass/fail result; do not mark it passed
-   from KFP states alone.
-4. Update the diagnostic evidence's `cluster_reverification` and create a
-   fresh cluster evidence record. The existing
-   `scripts/capture_slice1_cluster.py` records source, images, package hash,
-   and runs, but its `pipeline.version_id` currently denotes an *uploaded*
-   version, not the version executed by these inline-spec runs. Correct that
-   field/semantics before publishing evidence.
-5. Implement and verify the version-linked run path described above. Update
-   `architecture/implementation-slices.md`, `production/production-gaps.md`,
-   `evidence/README.md`, and the root README with accurate status and links.
-   Commit and push both repositories as required; do not claim production
-   readiness while open gaps remain.
+2. No acceptance suite is currently running. The next work is Slice 2:
+   establish the Data Registry and DCH contracts, pin their source revisions,
+   and agree the governed asset-to-model acceptance question before changing
+   component forks.
+3. Preserve the evidence boundary: Slice 1 proves the inherited fixture's
+   linked operational lineage and version-linked KFP execution. It does not
+   close the open production gaps or prove immutable source bytes.
 
 All cluster changes so far were confined to the existing
 `ol-best-practices` namespace and its fixture resources. No secrets should be

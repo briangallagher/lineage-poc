@@ -8,3 +8,7 @@ The first record is the local Slice 1 validation of the inherited
 `dr-lineage` fixture. Cluster evidence is accepted only when the scenario
 report contains the six expected terminal states, the retry contract passes,
 and every run carries the pipeline/version reference used for submission.
+
+The accepted cluster record is
+[`2026-09-30-slice-1-cluster.json`](2026-09-30-slice-1-cluster.json). The
+earlier retry-collision record remains a diagnostic explaining the fix.

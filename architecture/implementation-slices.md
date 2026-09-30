@@ -5,7 +5,7 @@ lineage question before more RHOAI components are added.
 
 ## Slice 0 — repository and source control baseline
 
-Status: in progress.
+Status: complete.
 
 Deliverables already started:
 
@@ -15,7 +15,7 @@ Deliverables already started:
 - fork manifest, commit snapshot, production-gap register, and source
   preflight.
 
-Exit criteria: the repository can identify every source checkout and refuses a
+Exit criteria: the repository identifies every source checkout and refuses a
 reproducibility claim when a configured checkout is dirty.
 
 ## Slice 1 — inherited golden fixture and contract harness
@@ -24,7 +24,7 @@ Use the existing `dr-lineage` application as the first backend workload. Run
 its local checks and the cluster scenarios, then adapt the assertions into
 machine-readable evidence consumed by this repository.
 
-Current status: local checks complete, RHOAI and application preflight pass,
+Current status: complete. Local checks pass, RHOAI and application preflight pass,
 and the retry-collision fix has completed a fresh six-workflow cluster rerun.
 The fixture submits by an uploaded KFP pipeline-version reference and
 re-reads every run to verify that KFP retained that reference. The fresh

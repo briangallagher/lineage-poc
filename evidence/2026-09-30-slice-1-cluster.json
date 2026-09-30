@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-09-30T07:27:01.111389+00:00",
+  "scope": "slice-1-fresh-cluster-suite",
+  "lineage_poc_base_commit": "375e283cd809645b2491a21b4c0e4066ed2c0e86",
+  "source": {
+    "repository_url": "https://github.com/briangallagher/dr-lineage.git",
+    "branch": "codex/lineage-poc-fixture-credentials",
+    "commit": "bfd8f9de9417c921c2db6617ce227178741fd5a7",
+    "source_scope": "sample-app-best-practices",
+    "working_tree": "clean"
+  },
+  "cluster": {
+    "api": "https://api.bgal-pool-ljt7l.aws.rh-ods.com:6443",
+    "identity": "htpasswd-cluster-admin-user",
+    "namespace": "ol-best-practices"
+  },
+  "images": {
+    "lineage-demo-app": {
+      "tag": "bfd8f9de9417",
+      "digest": "sha256:55fcabe57deb2328e9e846dad36dfeb3e79da41c8f972b0c4f210e441b5bfaaa",
+      "reference": "image-registry.openshift-image-registry.svc:5000/ol-best-practices/lineage-demo-app@sha256:55fcabe57deb2328e9e846dad36dfeb3e79da41c8f972b0c4f210e441b5bfaaa"
+    },
+    "lineage-demo-spark": {
+      "tag": "bfd8f9de9417",
+      "digest": "sha256:b0090d8297154ab779702d63f849810d364519d862573ea2b40a287fde8b5b48",
+      "reference": "image-registry.openshift-image-registry.svc:5000/ol-best-practices/lineage-demo-spark@sha256:b0090d8297154ab779702d63f849810d364519d862573ea2b40a287fde8b5b48"
+    }
+  },
+  "deployment": {
+    "registry_image": "image-registry.openshift-image-registry.svc:5000/ol-best-practices/lineage-demo-app:bfd8f9de9417",
+    "registry_ready_replicas": 1,
+    "seed_image": "image-registry.openshift-image-registry.svc:5000/ol-best-practices/lineage-demo-app:bfd8f9de9417",
+    "seed_succeeded": 1
+  },
+  "pipeline": {
+    "id": "76c7563e-7fcb-4fde-bbf4-61dac8a80a69",
+    "version_id": "5a83ee36-34f2-4764-b168-3cc7ef175ed1",
+    "run_submission": "pipeline_version_reference",
+    "package_sha256": "510c1999857d31702277525f5810151e79bb0739a89139ba2b7ed308a3c96fa3"
+  },
+  "asset_id": "01a08bab-6620-75e4-97bd-b71dc2b99cf4",
+  "bypass_event_count": {
+    "eventCountBefore": 748,
+    "eventCountAfter": 748
+  },
+  "runs": [
+    {
+      "scenario": "success-1",
+      "run_id": "aee6700b-6e48-49ed-9e59-a89b764e838d",
+      "expected_state": "SUCCEEDED",
+      "actual_state": "SUCCEEDED",
+      "pipeline_id": "76c7563e-7fcb-4fde-bbf4-61dac8a80a69",
+      "pipeline_version_id": "5a83ee36-34f2-4764-b168-3cc7ef175ed1"
+    },
+    {
+      "scenario": "success-2",
+      "run_id": "92d11481-92d1-44d7-aec4-966babb06e6c",
+      "expected_state": "SUCCEEDED",
+      "actual_state": "SUCCEEDED",
+      "pipeline_id": "76c7563e-7fcb-4fde-bbf4-61dac8a80a69",
+      "pipeline_version_id": "5a83ee36-34f2-4764-b168-3cc7ef175ed1"
+    },
+    {
+      "scenario": "success-after-bypass",
+      "run_id": "e1c733f2-4ed6-4631-9beb-6942893423b7",
+      "expected_state": "SUCCEEDED",
+      "actual_state": "SUCCEEDED",
+      "pipeline_id": "76c7563e-7fcb-4fde-bbf4-61dac8a80a69",
+      "pipeline_version_id": "5a83ee36-34f2-4764-b168-3cc7ef175ed1"
+    },
+    {
+      "scenario": "failure-ingest",
+      "run_id": "e19e1def-0388-4d1d-bbfa-2978a3eb3f36",
+      "expected_state": "FAILED",
+      "actual_state": "FAILED",
+      "pipeline_id": "76c7563e-7fcb-4fde-bbf4-61dac8a80a69",
+      "pipeline_version_id": "5a83ee36-34f2-4764-b168-3cc7ef175ed1"
+    },
+    {
+      "scenario": "failure-spark",
+      "run_id": "48453eb3-f355-4aea-8086-519047eea58d",
+      "expected_state": "FAILED",
+      "actual_state": "FAILED",
+      "pipeline_id": "76c7563e-7fcb-4fde-bbf4-61dac8a80a69",
+      "pipeline_version_id": "5a83ee36-34f2-4764-b168-3cc7ef175ed1"
+    },
+    {
+      "scenario": "failure-embed",
+      "run_id": "ed500ef8-12cf-4eb2-ae08-ad7923792458",
+      "expected_state": "FAILED",
+      "actual_state": "FAILED",
+      "pipeline_id": "76c7563e-7fcb-4fde-bbf4-61dac8a80a69",
+      "pipeline_version_id": "5a83ee36-34f2-4764-b168-3cc7ef175ed1"
+    }
+  ],
+  "verification": {
+    "status": "passed",
+    "checks": [
+      "registry-symlink",
+      "registry-facets",
+      "root-lifecycles",
+      "root-facets",
+      "manual-parent-runs",
+      "manual-lifecycles-and-facets",
+      "native-spark-parent-runs",
+      "native-spark-producer-and-facets",
+      "ingest-to-spark-datasets",
+      "spark-to-embedding-datasets",
+      "native-spark-column-lineage",
+      "per-root-successful-stage-correlation",
+      "manual-output-facets",
+      "stable-jobs-distinct-runs-and-outputs",
+      "failure-transitions-and-downstream-suppression",
+      "native-spark-start-and-fail-observed",
+      "one-retry-with-distinct-child-runs",
+      "bypass-blindness-demonstrated"
+    ]
+  }
+}

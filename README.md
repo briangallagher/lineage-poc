@@ -47,13 +47,14 @@ This repository contains the planning and traceability baseline. Slice 1 reuses
 the existing `dr-lineage` best-practices application as the initial workload
 and conformance fixture before adding new component-fork changes.
 
-The immediate next action is [Slice 1](architecture/implementation-slices.md):
-reproduce the inherited fixture, verify the active cluster context, and record
-the first machine-readable evidence bundle. The remaining acceptance run must
-use and verify an uploaded KFP pipeline-version reference; the earlier
-inline-spec suite is diagnostic evidence only.
+Slice 1 is complete for the inherited fixture: the version-linked cluster suite
+passed and its sanitized evidence is recorded below. The next planned slice is
+the governed asset-to-model path, with Data Registry and DCH contracts pinned
+before adding new component-fork changes.
 
 The first local validation result is recorded in
 [`evidence/2026-09-29-slice-1-local.json`](evidence/2026-09-29-slice-1-local.json).
 The RHOAI health check and retained lineage verification are recorded in
 [`evidence/2026-09-29-cluster-preflight.json`](evidence/2026-09-29-cluster-preflight.json).
+The accepted version-linked Slice 1 cluster suite is recorded in
+[`evidence/2026-09-30-slice-1-cluster.json`](evidence/2026-09-30-slice-1-cluster.json).
